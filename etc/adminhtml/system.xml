@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section
+            id="stoneholl_order_navigation"
+            translate="label"
+            sortOrder="70"
+            showInDefault="1"
+            showInWebsite="0"
+            showInStore="0">
+            <label>Previous / Next Order Navigation</label>
+            <tab>stoneholl</tab>
+            <resource>Stoneholl_OrderNavigation::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field
+                    id="enabled"
+                    translate="label comment"
+                    type="select"
+                    sortOrder="10"
+                    showInDefault="1"
+                    showInWebsite="0"
+                    showInStore="0"
+                    canRestore="1">
+                    <label>Enable Order Navigation</label>
+                    <comment>
+                        Show same-store neighbors by record ID, across all statuses. Grid filters do not apply.
+                        For roles with third-party order restrictions, grant View Previous / Next Order Navigation
+                        only after verifying query and target authorization integration.
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Stoneholl\OrderNavigation\Model\Config\Enabled</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

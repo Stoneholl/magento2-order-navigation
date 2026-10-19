@@ -1,0 +1,26 @@
+<?php
+/** @var \Stoneholl\OrderNavigation\Block\Adminhtml\Navigation $block */
+$escaper = $block->getOutputEscaper();
+$state = $block->getNavigationState();
+?>
+<?php if ($state['status'] === 'ready'): ?>
+    <?php foreach (['previous' => __('Previous order'), 'next' => __('Next order')] as $direction => $label): ?>
+        <?php if ($state[$direction] !== null): ?>
+            <?php $targetLabel = $direction === 'previous'
+                ? __('Previous order: %1', $state[$direction]['increment_id'])
+                : __('Next order: %1', $state[$direction]['increment_id']); ?>
+            <a class="action action-default action-quaternary abs-action-l"
+               id="stoneholl-order-navigation-<?= $escaper->escapeHtmlAttr($direction) ?>"
+               href="<?= $escaper->escapeUrl($block->getOrderUrl($state[$direction]['entity_id'])) ?>"
+               aria-label="<?= $escaper->escapeHtmlAttr($targetLabel) ?>"
+               title="<?= $escaper->escapeHtmlAttr($targetLabel) ?>">
+                <?= $escaper->escapeHtml($label) ?>
+            </a>
+        <?php else: ?>
+            <?php $endLabel = $direction === 'previous' ? __('No previous order') : __('No next order'); ?>
+            <span class="action action-default action-quaternary abs-action-l disabled" aria-disabled="true">
+                <?= $escaper->escapeHtml($endLabel) ?>
+            </span>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

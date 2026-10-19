@@ -1,0 +1,43 @@
+<?php
+/** @var \Stoneholl\OrderNavigation\Block\Adminhtml\Navigation $block */
+$escaper = $block->getOutputEscaper();
+$state = $block->getNavigationState();
+?>
+<?php if ($state['status'] !== 'hidden'): ?>
+<section class="admin__page-section" aria-labelledby="stoneholl-order-navigation-title">
+    <div class="admin__page-section-title">
+        <strong class="title" id="stoneholl-order-navigation-title">
+            <?= $escaper->escapeHtml(__('Order navigation')) ?>
+        </strong>
+    </div>
+    <div class="admin__page-section-content">
+        <p><?= $escaper->escapeHtml(__('Order sequence · Same store · Grid filters do not apply')) ?></p>
+        <?php if ($state['status'] === 'store_unavailable'): ?>
+            <p><?= $escaper->escapeHtml(__('Navigation unavailable for this store')) ?></p>
+        <?php elseif ($state['status'] !== 'ready'): ?>
+            <p><?= $escaper->escapeHtml(__('Temporarily unavailable')) ?></p>
+        <?php else: ?>
+            <nav aria-label="<?= $escaper->escapeHtmlAttr(__('Order navigation')) ?>">
+                <p>
+                    <?php if ($state['previous'] !== null): ?>
+                        <a href="<?= $escaper->escapeUrl($block->getOrderUrl($state['previous']['entity_id'])) ?>">
+                            <?= $escaper->escapeHtml(__('Previous order: %1', $state['previous']['increment_id'])) ?>
+                        </a>
+                    <?php else: ?>
+                        <span><?= $escaper->escapeHtml(__('No previous order')) ?></span>
+                    <?php endif; ?>
+                </p>
+                <p>
+                    <?php if ($state['next'] !== null): ?>
+                        <a href="<?= $escaper->escapeUrl($block->getOrderUrl($state['next']['entity_id'])) ?>">
+                            <?= $escaper->escapeHtml(__('Next order: %1', $state['next']['increment_id'])) ?>
+                        </a>
+                    <?php else: ?>
+                        <span><?= $escaper->escapeHtml(__('No next order')) ?></span>
+                    <?php endif; ?>
+                </p>
+            </nav>
+        <?php endif; ?>
+    </div>
+</section>
+<?php endif; ?>
