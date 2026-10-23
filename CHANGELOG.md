@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 1.0.1 - 2026-10-23
+
+- Rename the Composer package to `stoneholl/magento2-order-navigation` and replace its corresponding legacy `stoneholl/module-order-navigation` identity at `self.version`.
+- Require the canonical Core package from version 1.0.1 and update installation/migration documentation.
+- Keep Magento module identifiers, configuration, storage and licensing unchanged.
+
 ## 1.0.0 - 2026-10-19
 
 - Match adjacent native Admin actions before and after floating-header initialization, including legacy Magento.

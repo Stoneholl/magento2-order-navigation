@@ -1,6 +1,6 @@
 # Stoneholl Previous / Next Order Navigation
 
-Free MIT module `Stoneholl_OrderNavigation`, package `stoneholl/module-order-navigation`.
+Free MIT module `Stoneholl_OrderNavigation`, package `stoneholl/magento2-order-navigation`.
 
 ## Features
 
@@ -33,7 +33,7 @@ third-party Admin themes remain untested. Declared dependency ranges are not a c
 Install with your normal approved Magento deployment procedure:
 
 ```sh
-composer require stoneholl/module-order-navigation:^1.0
+composer require stoneholl/magento2-order-navigation:^1.0
 bin/magento module:enable Stoneholl_Core Stoneholl_OrderNavigation
 bin/magento setup:upgrade --safe-mode=1
 ```
@@ -74,5 +74,18 @@ Remove only `stoneholl_order_navigation/general/enabled` configuration rows and 
 exact path through an approved maintenance procedure. There is no operational schema/data to remove. Do not delete
 orders or shared Core while another package needs it.
 
-Report issues at https://github.com/Stoneholl/module-order-navigation/issues with exact Magento/PHP versions and
+Report issues at https://github.com/Stoneholl/magento2-order-navigation/issues with exact Magento/PHP versions and
 reproduction steps. Do not include credentials, secret-key URLs or customer/order data. Licensed under MIT.
+
+## Composer package naming
+
+The canonical Composer name is `stoneholl/magento2-order-navigation`. The former `stoneholl/module-order-navigation` name is a legacy identity. The renamed package replaces that identity at `self.version`, so Composer installs one copy of the Magento module. Existing immutable releases remain unchanged.
+
+When migrating an existing root requirement, back up the project and remove the old requirement without updating, then require the new package with its dependencies:
+
+```bash
+composer remove stoneholl/module-order-navigation --no-update
+composer require stoneholl/magento2-order-navigation --with-all-dependencies
+```
+
+Run the Magento upgrade, compilation and cache commands documented above according to your deployment mode. Keep native `Stoneholl_*` module names and configuration paths unchanged.

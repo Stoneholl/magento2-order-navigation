@@ -15,7 +15,7 @@ class ProductProvider implements ProductProviderInterface
             'order-navigation',
             'Stoneholl Previous / Next Order Navigation',
             ['Stoneholl_OrderNavigation'],
-            ['stoneholl/module-order-navigation']
+            ['stoneholl/magento2-order-navigation']
         )];
     }
 }
